@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/images/exp.png";
 import profile from "../assets/images/exp.png";
-import { FaUser } from "react-icons/fa";
+import ProfileMenu from "./menu";
 
 const Header = () => {
   const navButtons = [
@@ -28,7 +28,7 @@ const Header = () => {
           </button>
         ))}
         <div className="flex items-center ml-4">
-          {!profile ? (
+          {/* {!profile ? (
             <>
               <FaUser className="text-white mr-2" />
             </>
@@ -40,7 +40,8 @@ const Header = () => {
                 className="w-8 h-8 rounded-full cursor-pointer"
               />
             </>
-          )}
+          )} */}
+          <ProfileMenu />
         </div>
       </div>
     </header>

@@ -12,7 +12,7 @@ const TweetPost = ({ profilePic, onPost }) => {
   };
 
   return (
-    <div className="flex p-4 bg-white rounded-md shadow-md">
+    <div className="flex p-4  rounded-md shadow-md">
       <div className="flex-shrink-0">
         {/* Rounded profile picture */}
         <img src={logo} alt="Profile" className="w-16 h-16 rounded-full" />
@@ -21,7 +21,7 @@ const TweetPost = ({ profilePic, onPost }) => {
         {/* Textarea for writing the tweet */}
         <textarea
           placeholder="What's in your mind?"
-          className="w-full p-2 border rounded-md resize-none"
+          className=" w-full p-2 border rounded-md resize-none"
         />
         {/* Post button */}
         <button

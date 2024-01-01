@@ -9,7 +9,7 @@ const SuggestedFriendCard = ({ profilePic, name }) => {
   };
 
   return (
-    <div className="bg-white flex items-center justify-center w-full h-auto pt-4 pb-4">
+    <div className=" flex items-center justify-center w-full h-auto pt-4 pb-4">
       <img
         src={profilePic}
         alt={name}

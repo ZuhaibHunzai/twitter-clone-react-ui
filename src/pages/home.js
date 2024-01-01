@@ -62,7 +62,7 @@ export default function Home() {
     { hashtag: "test4", tweetCount: "13.2k" },
   ];
   return (
-    <div className="grid grid-cols-6 gap-2 pt-16">
+    <div className="grid grid-cols-6 gap-2 pt-16  text-black">
       {/* suggested friends */}
       <div className="col-span-1 fixed h-[90vh] overflow-y-auto">
         <div className="flex flex-col items-center pt-6 pb-6 w-full">
