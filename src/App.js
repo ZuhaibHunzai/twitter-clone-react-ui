@@ -1,9 +1,10 @@
 import "./App.css";
+import Routers from "./routers";
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-5xl text-red-500">hello world</h1>
+      <Routers />
     </div>
   );
 }
