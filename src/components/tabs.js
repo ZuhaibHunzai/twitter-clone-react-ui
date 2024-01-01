@@ -2,6 +2,7 @@ import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import MyTweetsCard from "./myTweetCard";
+import ProfileSettings from "./profileSettings";
 
 const ProfileTabs = () => {
   const tweets = [
@@ -52,7 +53,7 @@ const ProfileTabs = () => {
       </TabList>
 
       <TabPanel>
-        <div className="p-4 grid grid-cols-8">
+        <div className=" grid grid-cols-8">
           {tweets &&
             tweets.map((tweet, index) => {
               return (
@@ -68,9 +69,8 @@ const ProfileTabs = () => {
         </div>
       </TabPanel>
       <TabPanel>
-        <div className="p-4">
-          <h2 className="text-2xl font-bold mb-4">Profile Settings Content</h2>
-          {/* Content for "Profile Settings" tab */}
+        <div className="">
+          <ProfileSettings />
         </div>
       </TabPanel>
     </Tabs>

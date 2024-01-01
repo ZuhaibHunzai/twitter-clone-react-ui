@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 function Login(props) {
   return (
-    <section data-aos="zoom-in" data-aos-duration="1000">
+    <section>
       <form className="mt-16 w-full max-w-md m-auto">
         <div className="bg-white shadow-md rounded p-8">
           <h2 className="text-3xl font-bold mb-4 text-gray-800">Login</h2>
