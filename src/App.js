@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <h1 className="text-5xl text-red-500">Twitter clone</h1>
+      <h1 className="text-5xl text-red-500">hello world</h1>
     </div>
   );
 }
