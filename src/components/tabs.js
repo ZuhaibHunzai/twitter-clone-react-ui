@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import MyTweetsCard from "./myTweetCard";
 import ProfileSettings from "./profileSettings";
+import TweetPost from "./tweetPost";
 
 const ProfileTabs = () => {
   const tweets = [
@@ -47,13 +48,17 @@ const ProfileTabs = () => {
           My Tweets
         </Tab>
         <Tab className="flex items-center text-black cursor-pointer px-6 py-2 border-b-2 border-transparent">
+          <span className="mr-2">📝</span>
+          New Tweet
+        </Tab>
+        <Tab className="flex items-center text-black cursor-pointer px-6 py-2 border-b-2 border-transparent">
           <span className="mr-2">⚙️</span>
           Profile Settings
         </Tab>
       </TabList>
 
       <TabPanel>
-        <div className=" grid grid-cols-8">
+        <div className=" grid grid-cols-8 gap-4 ml-4">
           {tweets &&
             tweets.map((tweet, index) => {
               return (
@@ -66,6 +71,11 @@ const ProfileTabs = () => {
                 </div>
               );
             })}
+        </div>
+      </TabPanel>
+      <TabPanel>
+        <div className="">
+          <TweetPost />
         </div>
       </TabPanel>
       <TabPanel>
