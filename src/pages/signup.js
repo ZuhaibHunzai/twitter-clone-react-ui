@@ -15,7 +15,7 @@ function Register(props) {
 
   return (
     <div className="overflow-hidden w-full">
-      <section data-aos="zoom-in" data-aos-duration="1000" className=" py-16">
+      <section className=" py-16">
         <form
           className="mt-5 max-w-md mx-auto"
           autoComplete="off"
