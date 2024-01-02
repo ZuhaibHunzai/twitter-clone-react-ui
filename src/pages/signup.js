@@ -1,64 +1,85 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-// const initialValues = {
-//   fullname: "",
-//   username: "",
-//   email: "",
-// };
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function Register(props) {
-  // const navigate = useNavigate();
-  // const handlePath = (path) => {
-  //   navigate(path);
-  // };
+  const formik = useFormik({
+    initialValues: {
+      fullname: "",
+      username: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      fullname: Yup.string().required("Required"),
+      username: Yup.string().required("Required"),
+      email: Yup.string().email("Invalid email address").required("Required"),
+      password: Yup.string().required("Required"),
+    }),
+    onSubmit: (values) => {
+      console.log("Form values:", values);
+      // You can perform further actions, such as making an API request
+    },
+  });
 
   return (
     <div className="overflow-hidden w-full">
-      <section className=" py-16">
+      <section className="py-16">
         <form
           className="mt-5 max-w-md mx-auto"
           autoComplete="off"
-          // onSubmit={handleSubmit}
+          onSubmit={formik.handleSubmit}
         >
           <div className="flex flex-col gap-4 bg-white shadow-md rounded p-8">
             <input
               placeholder="Full Name"
               name="fullname"
               type="text"
-              // onBlur={handleBlur}
-              // onChange={handleChange}
-              // value={values.fullname}
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-black"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.fullname}
             />
+            {formik.touched.fullname && formik.errors.fullname ? (
+              <div className="text-red-500">{formik.errors.fullname}</div>
+            ) : null}
             <input
               placeholder="Username"
               name="username"
               type="text"
-              // value={values.username}
-              // onBlur={handleBlur}
-              // onChange={handleChange}
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-black"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.username}
             />
+            {formik.touched.username && formik.errors.username ? (
+              <div className="text-red-500">{formik.errors.username}</div>
+            ) : null}
             <input
               placeholder="Email Address"
               name="email"
               type="email"
-              // onBlur={handleBlur}
-              // onChange={handleChange}
-              // value={values.email}
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-black"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
             />
+            {formik.touched.email && formik.errors.email ? (
+              <div className="text-red-500">{formik.errors.email}</div>
+            ) : null}
             <input
               placeholder="Password"
               name="password"
               type="password"
-              // onBlur={handleBlur}
-              // onChange={handleChange}
-              // value={values.password}
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-black"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
             />
-
+            {formik.touched.password && formik.errors.password ? (
+              <div className="text-red-500">{formik.errors.password}</div>
+            ) : null}
             <div className="w-full mt-8">
               <button
                 type="submit"
@@ -71,9 +92,9 @@ function Register(props) {
               <p>
                 Already have an account?{" "}
                 <span>
-                  <a href="/login" className="text-blue-400">
+                  <Link to="/login" className="text-blue-400">
                     Login
-                  </a>
+                  </Link>
                 </span>
               </p>
             </div>
@@ -83,39 +104,5 @@ function Register(props) {
     </div>
   );
 }
-
-// const validationSchema = object().shape({
-//   fullname: string()
-//     .required("Name is required")
-//     .matches("^(.*?)\\s([^ ]+)$", "Name AND Surname"),
-//   username: string()
-//     .required("Username is required")
-//     .min(4, "Username must be at least 4 characters")
-//     .matches(/^\w+$/, "Alphanumeric characters and underscores only")
-//     .test(
-//       "is-username-available",
-//       "Username is not available",
-//       async (value) => {
-//         if (!value) {
-//           return true;
-//         }
-//       }
-//     ),
-//   email: string()
-//     .required("Email is required")
-//     .email("Invalid email format")
-//     .test(
-//       "is-usermail-available",
-//       "Usermail is not available",
-//       async (value) => {
-//         if (!value) {
-//           return true;
-//         }
-//       }
-//     ),
-//   password: string()
-//     .required("Password is required")
-//     .min(8, "Minimum 8 characters"),
-// });
 
 export default Register;
