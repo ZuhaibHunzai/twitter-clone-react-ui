@@ -1,8 +1,8 @@
-// import { combineReducers } from "@reduxjs/toolkit";
-// import tweetsSlicer from "./tweet/tweets.slicer";
+import { combineReducers } from "@reduxjs/toolkit";
+import tweetsSlicer from "./tweet/tweets.slicer";
 
-// const rootReducer = combineReducers({
-//   tweeets: tweetsSlicer,
-// });
+const rootReducer = combineReducers({
+  tweeets: tweetsSlicer,
+});
 
-// export default rootReducer;
+export default rootReducer;

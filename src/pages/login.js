@@ -1,31 +1,46 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useAuth } from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
-function Login(props) {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-      rememberMe: false,
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string().required("Required"),
-    }),
-    onSubmit: (values) => {
-      console.log("Form values:", values);
-      // You can perform further actions, such as making an API request
+function Login() {
+  const auth = useAuth();
+
+  const initialValues = {
+    email: "",
+    password: "",
+    rememberMe: true,
+  };
+
+  const { handleChange, handleSubmit, handleBlur } = useFormik({
+    initialValues,
+    onSubmit: async (values) => {
+      const promiseSignin = new Promise((resolve, reject) => {
+        auth.login(
+          { ...values },
+          // error callback
+          () => {
+            reject("Email or Password is invalid");
+          },
+          // success callback
+          () => {
+            resolve("");
+          }
+        );
+      });
+
+      toast.promise(promiseSignin, {
+        loading: "Authenticating...",
+        success: "Signed in successfully",
+        error: (err) => err,
+      });
     },
   });
 
   return (
     <section>
-      <form
-        className="mt-28 w-full max-w-md m-auto"
-        onSubmit={formik.handleSubmit}
-      >
+      <form className="mt-28 w-full max-w-md m-auto" onSubmit={handleSubmit}>
         <div className="bg-white shadow-md rounded p-8">
           <h2 className="text-3xl font-bold mb-4 text-gray-800">Login</h2>
           <div className="mb-4">
@@ -34,13 +49,9 @@ function Login(props) {
               placeholder="Email"
               type="email"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="text-red-500">{formik.errors.email}</div>
-            ) : null}
           </div>
           <div className="mb-4">
             <input
@@ -48,22 +59,17 @@ function Login(props) {
               placeholder="Password"
               type="password"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
+              onBlur={handleBlur}
+              onChange={handleChange}
             />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="text-red-500">{formik.errors.password}</div>
-            ) : null}
           </div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
               <input
                 name="rememberMe"
                 type="checkbox"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                checked={formik.values.rememberMe}
+                onBlur={handleBlur}
+                onChange={handleChange}
               />
               <label className="ml-2 cursor-pointer">Remember Me</label>
             </div>

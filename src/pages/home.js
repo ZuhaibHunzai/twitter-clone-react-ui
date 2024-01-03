@@ -5,8 +5,11 @@ import TweetPost from "../components/tweetPost";
 import TweetCard from "../components/tweetCard";
 import TrendingCard from "../components/trendingCard";
 import { FaSearch } from "react-icons/fa";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Home() {
+  const auth = useAuth();
+  console.log(auth, "auth");
   const suggestedFriends = [
     { id: 1, profilePic: logo, name: "John Doe" },
     { id: 2, profilePic: logo, name: "Jane Smith" },
