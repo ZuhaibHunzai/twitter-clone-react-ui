@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SuggestedFriendCard from "../components/suggestedFriendsCard";
 import logo from "../assets/images/exp.png";
 import TweetPost from "../components/tweetPost";
 import TweetCard from "../components/tweetCard";
 import TrendingCard from "../components/trendingCard";
 import { FaSearch } from "react-icons/fa";
-import { useAuth } from "../hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllTweets } from "../redux/tweet/tweets.action";
 
 export default function Home() {
-  const auth = useAuth();
-  console.log(auth, "auth");
+  const dispatch = useDispatch();
+
+  const tweets = useSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(getAllTweets());
+  }, [dispatch]);
+
   const suggestedFriends = [
     { id: 1, profilePic: logo, name: "John Doe" },
     { id: 2, profilePic: logo, name: "Jane Smith" },
@@ -23,38 +30,6 @@ export default function Home() {
     { id: 2, profilePic: logo, name: "Jane Smith" },
     { id: 2, profilePic: logo, name: "Jane Smith" },
     { id: 2, profilePic: logo, name: "Jane Smith" },
-  ];
-
-  const tweets = [
-    {
-      userPic: logo,
-      name: "zuhaib alam",
-      userName: "zuhaib_alam188",
-      date: "01/01/2024",
-      tweetText: "Hey there! this is a test tweet text for tweeter clone",
-    },
-    {
-      userPic: logo,
-      name: "zuhaib alam",
-      userName: "zuhaib_alam188",
-      date: "01/01/2024",
-      tweetText:
-        "Hey there! this is a test tweet text for tweeter clone Hey there! this is a test tweet text for tweeter clone Hey there! this is a test tweet text for tweeter clone",
-    },
-    {
-      userPic: logo,
-      name: "zuhaib alam",
-      userName: "zuhaib_alam188",
-      date: "01/01/2024",
-      tweetText: "Hey there! this is a test tweet text for tweeter clone",
-    },
-    {
-      userPic: logo,
-      name: "zuhaib alam",
-      userName: "zuhaib_alam188",
-      date: "01/01/2024",
-      tweetText: "Hey there! this is a test tweet text for tweeter clone ",
-    },
   ];
 
   const trendingTags = [
@@ -89,14 +64,14 @@ export default function Home() {
         </div>
         <div className="mt-4">
           {tweets &&
-            tweets.map((tweet) => (
+            tweets?.tweeets?.allTweets?.data?.allTweets.map((tweet) => (
               <TweetCard
                 key={tweet.id}
-                userPic={tweet.userPic}
-                name={tweet.name}
+                name={tweet?.name}
                 userName={tweet.userName}
+                userId={tweet.userId}
+                tweetText={tweet.tweet}
                 date={tweet.date}
-                tweetText={tweet.tweetText}
               />
             ))}
         </div>

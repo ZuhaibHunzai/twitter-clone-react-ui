@@ -106,7 +106,7 @@ const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem("userData");
     localStorage.removeItem(authConfig.storageTokenKeyName);
-    navigate("/home");
+    navigate("/");
   };
 
   const values = {

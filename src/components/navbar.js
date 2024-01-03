@@ -1,9 +1,16 @@
 import React from "react";
 import logo from "../assets/images/exp.png";
-import profile from "../assets/images/exp.png";
 import ProfileMenu from "./menu";
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
   const navButtons = [
     { text: "Home", path: "/home" },
     { text: "Trending", path: "/trending" },
@@ -27,22 +34,20 @@ const Header = () => {
             {button.text}
           </button>
         ))}
-        <div className="flex items-center ml-4">
-          {/* {!profile ? (
-            <>
-              <FaUser className="text-white mr-2" />
-            </>
-          ) : (
-            <>
-              <img
-                src={profile}
-                alt="Profile"
-                className="w-8 h-8 rounded-full cursor-pointer"
-              />
-            </>
-          )} */}
-          <ProfileMenu />
-        </div>
+
+        {auth && auth?.user?.name && (
+          <div className="flex items-center ml-4">
+            <ProfileMenu />
+          </div>
+        )}
+        {!auth?.user?.name && (
+          <button
+            className="text-white mr-4"
+            onClick={() => handleNavigate("/login")}
+          >
+            login
+          </button>
+        )}
       </div>
     </header>
   );

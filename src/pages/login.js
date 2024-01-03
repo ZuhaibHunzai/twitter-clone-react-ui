@@ -87,7 +87,7 @@ function Login() {
           </button>
           <p className="text-center">or</p>
           <Link
-            to="/signup"
+            to="/register"
             className="text-center block bg-gray-800 text-white py-2 px-4 rounded-md w-full mt-4"
           >
             REGISTER

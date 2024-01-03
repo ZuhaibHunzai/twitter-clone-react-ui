@@ -2,24 +2,58 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import toast from "react-hot-toast";
+import { useAuth } from "../hooks/useAuth";
 
 function Register(props) {
-  const formik = useFormik({
-    initialValues: {
-      fullname: "",
-      username: "",
-      email: "",
-      password: "",
-    },
-    validationSchema: Yup.object({
-      fullname: Yup.string().required("Required"),
-      username: Yup.string().required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string().required("Required"),
-    }),
-    onSubmit: (values) => {
-      console.log("Form values:", values);
-      // You can perform further actions, such as making an API request
+  const auth = useAuth();
+
+  const initialValues = {
+    name: "",
+    userName: "",
+    email: "",
+    password: "",
+  };
+
+  const { handleChange, handleSubmit, handleBlur, values } = useFormik({
+    initialValues,
+    // validationSchema,
+    onSubmit: async (values) => {
+      console.log(values, "form values");
+      const promiseSignup = new Promise((resolve, reject) => {
+        // Create a new object with the dateOfBirthString
+        const formData = {
+          ...values,
+        };
+        auth.signup(
+          { ...formData },
+          // error callback
+          (reply) => {
+            console.log({ reply });
+
+            if (
+              reply.response?.status === 400 ||
+              reply.response?.status === 409
+            ) {
+              const message =
+                reply.response?.data?.error ||
+                reply.message ||
+                "Something went wrong";
+              return reject(message);
+            }
+          },
+          // success callback
+          () => {
+            resolve("Registered account successfully");
+          }
+        );
+      });
+
+      toast.promise(promiseSignup, {
+        loading: "Registering new account",
+        success: (response) => response,
+        error: (err) => err,
+      });
     },
   });
 
@@ -29,57 +63,45 @@ function Register(props) {
         <form
           className="mt-5 max-w-md mx-auto"
           autoComplete="off"
-          onSubmit={formik.handleSubmit}
+          onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-4 bg-white shadow-md rounded p-8">
             <input
               placeholder="Full Name"
-              name="fullname"
+              name="name"
               type="text"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-black"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.fullname}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.name}
             />
-            {formik.touched.fullname && formik.errors.fullname ? (
-              <div className="text-red-500">{formik.errors.fullname}</div>
-            ) : null}
             <input
               placeholder="Username"
-              name="username"
+              name="userName"
               type="text"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-black"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.username}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.userName}
             />
-            {formik.touched.username && formik.errors.username ? (
-              <div className="text-red-500">{formik.errors.username}</div>
-            ) : null}
             <input
               placeholder="Email Address"
               name="email"
               type="email"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-black"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.email}
             />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="text-red-500">{formik.errors.email}</div>
-            ) : null}
             <input
               placeholder="Password"
               name="password"
               type="password"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500 text-black"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.password}
             />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="text-red-500">{formik.errors.password}</div>
-            ) : null}
             <div className="w-full mt-8">
               <button
                 type="submit"
