@@ -6,23 +6,32 @@ import Profile from "../pages/profile";
 import Header from "../components/navbar";
 import { AuthProvider } from "../context/authContext";
 import PublicPreview from "../pages/user";
+import ProtectedRoute from "../utils/protectedRoute";
 
 const Routers = () => {
   return (
-    <>
-      <Router>
-        <AuthProvider>
-          <Header />
-          <Routes>
-            <Route element={<Login />} path="/login" />
-            <Route element={<Register />} path="/register" />
-            <Route element={<Home />} path="/" />
-            <Route element={<Profile />} path="/profile" />
-            <Route element={<PublicPreview />} path="/user/:userId" />
-          </Routes>
-        </AuthProvider>
-      </Router>
-    </>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route
+            path="/*"
+            element={
+              <ProtectedRoute>
+                <Header />
+                <Routes>
+                  <Route element={<Register />} path="/register" />
+                  <Route element={<Home />} path="/" />
+                  <Route element={<Profile />} path="/profile" />
+                  <Route element={<PublicPreview />} path="/user/:userId" />
+                </Routes>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route element={<Login />} path="/login" />
+        </Routes>
+      </AuthProvider>
+    </Router>
   );
 };
 
