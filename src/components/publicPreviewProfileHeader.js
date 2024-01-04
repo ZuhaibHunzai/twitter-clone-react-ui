@@ -1,13 +1,8 @@
 import React from "react";
 import bg from "../assets/images/profile-bg.jpg";
 import logo from "../assets/images/exp.png";
-import { useAuth } from "../hooks/useAuth";
 
-const ProfileHeader = () => {
-  const auth = useAuth();
-
-  console.log(auth?.user, "user");
-
+const PublicPreviewProfileHeader = ({ name, username }) => {
   return (
     <div className="p-6 h-[250px]  bg-gradient-to-b text-black rounded-md shadow-md border">
       <div
@@ -26,18 +21,12 @@ const ProfileHeader = () => {
         </div>
 
         <div className="pl-5">
-          <h2 className="text-xl text-white  font-bold mb-2">
-            {auth?.user?.name}
-          </h2>
-          <p className="text-gray-600">{auth?.user?.userName}</p>
+          <h2 className="text-xl text-white  font-bold mb-2">{name}</h2>
+          <p className="text-gray-600">{username}</p>
         </div>
       </div>
-      {/* <p className="text-gray-300 ">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula
-        nec dui quis venenatis. Quisque in ligula in neque pharetra ullamcorper.
-      </p> */}
     </div>
   );
 };
 
-export default ProfileHeader;
+export default PublicPreviewProfileHeader;

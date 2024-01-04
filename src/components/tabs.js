@@ -1,45 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import MyTweetsCard from "./myTweetCard";
 import ProfileSettings from "./profileSettings";
 import TweetPost from "./tweetPost";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserTweets } from "../redux/tweet/tweets.action";
+import { useAuth } from "../hooks/useAuth";
 
 const ProfileTabs = () => {
-  const tweets = [
-    {
-      tweetText:
-        "Hey there! this is a test tweet text, Hey there! this is a test tweet text",
-    },
-    {
-      tweetText:
-        "Hey there! this is a test tweet text, Hey there! this is a test tweet text",
-    },
-    {
-      tweetText:
-        "Hey there! this is a test tweet text, Hey there! this is a test tweet text",
-    },
-    {
-      tweetText:
-        "Hey there! this is a test tweet text, Hey there! this is a test tweet text",
-    },
-    {
-      tweetText:
-        "Hey there! this is a test tweet text, Hey there! this is a test tweet text",
-    },
-    {
-      tweetText:
-        "Hey there! this is a test tweet text, Hey there! this is a test tweet text",
-    },
-    {
-      tweetText:
-        "Hey there! this is a test tweet text, Hey there! this is a test tweet text",
-    },
-    {
-      tweetText:
-        "Hey there! this is a test tweet text, Hey there! this is a test tweet text",
-    },
-  ];
+  const auth = useAuth();
+  const userId = auth?.user?._id;
+
+  const dispatch = useDispatch();
+  const myTweets = useSelector((state) => state.tweeets);
+
+  useEffect(() => {
+    dispatch(getUserTweets(userId));
+  }, [dispatch]);
+
   return (
     <Tabs>
       <TabList className="flex p-4 ">
@@ -59,14 +38,15 @@ const ProfileTabs = () => {
 
       <TabPanel>
         <div className=" grid grid-cols-8 gap-4 ml-4">
-          {tweets &&
-            tweets.map((tweet, index) => {
+          {myTweets?.userTweets?.data?.tweets &&
+            myTweets?.userTweets?.data?.tweets.map((tweet, index) => {
               return (
                 <div className="col-span-8 md:col-span-4 lg:col-span-2">
                   <MyTweetsCard
                     className=""
                     key={index}
-                    tweetText={tweet.tweetText}
+                    tweetText={tweet.tweet}
+                    id={tweet._id}
                   />
                 </div>
               );

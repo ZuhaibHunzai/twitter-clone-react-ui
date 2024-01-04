@@ -4,18 +4,23 @@ import Login from "../pages/login";
 import Register from "../pages/signup";
 import Profile from "../pages/profile";
 import Header from "../components/navbar";
+import { AuthProvider } from "../context/authContext";
+import PublicPreview from "../pages/user";
 
 const Routers = () => {
   return (
     <>
       <Router>
-        <Header />
-        <Routes>
-          <Route element={<Login />} path="/login" />
-          <Route element={<Register />} path="/register" />
-          <Route element={<Home />} path="/" />
-          <Route element={<Profile />} path="/profile" />
-        </Routes>
+        <AuthProvider>
+          <Header />
+          <Routes>
+            <Route element={<Login />} path="/login" />
+            <Route element={<Register />} path="/register" />
+            <Route element={<Home />} path="/" />
+            <Route element={<Profile />} path="/profile" />
+            <Route element={<PublicPreview />} path="/user/:userId" />
+          </Routes>
+        </AuthProvider>
       </Router>
     </>
   );
