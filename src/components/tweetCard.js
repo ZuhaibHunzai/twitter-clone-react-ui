@@ -39,7 +39,7 @@ const TweetCard = ({ userId, name, userName, tweetText, date }) => {
   const formattedDate = formatDate(inputDate);
 
   return (
-    <div className=" text-black p-4 mb-4 rounded-md shadow-md border border-gray-200 relative">
+    <div className=" text-black p-4 mb-4 rounded-md shadow-md border border-gray-200 relative min-w-[300px]">
       <div onClick={handleRoute} className="cursor-pointer">
         <div className="flex items-center mb-4">
           {/* Rounded profile picture */}
@@ -65,7 +65,7 @@ const TweetCard = ({ userId, name, userName, tweetText, date }) => {
         </div>
       </div>
 
-      <div className="flex justify-between mt-4">
+      <div className="flex flex-wrap justify-between mt-4">
         <div className="flex items-center cursor-pointer">
           <Icon icon={heartFilled} className="text-red-500 mr-2" />
           <span>Like</span>

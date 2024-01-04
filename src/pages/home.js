@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <div className="grid grid-cols-6 gap-2 mt-20 text-black">
       {/* suggested friends */}
-      <div className="col-span-1 fixed h-[90vh] overflow-y-auto">
+      <div className="hidden md:block col-span-1 fixed h-[90vh] overflow-y-auto">
         <div className="flex flex-col items-center pt-6 pb-6 w-full">
           <h1 className="text-2xl mb-4 p-4">Suggested Friends</h1>
           {suggestedFriends.map((friend) => (
@@ -58,7 +58,7 @@ export default function Home() {
         </div>
       </div>
       {/* tweets */}
-      <div className="col-span-4 col-start-2 m-4">
+      <div className="col-span-4 col-start-2 ">
         <div>
           <TweetPost />
         </div>
@@ -77,7 +77,7 @@ export default function Home() {
         </div>
       </div>
       {/* trendings */}
-      <div className="col-span-1 text-left">
+      <div className="hidden md:block col-span-1 text-left">
         <div className="relative flex items-center mt-4 mr-2">
           <input
             type="text"
