@@ -3,11 +3,6 @@ import PropTypes from "prop-types";
 import { FaUserPlus } from "react-icons/fa";
 
 const SuggestedFriendCard = ({ profilePic, name }) => {
-  const handleAddFriend = () => {
-    // Implement logic to send friend request
-    console.log(`Sending friend request to ${name}`);
-  };
-
   return (
     <div className=" flex items-center justify-center w-full h-auto pt-4 pb-4">
       <img
@@ -17,10 +12,7 @@ const SuggestedFriendCard = ({ profilePic, name }) => {
       />
       <div className="">
         <p className="font-bold text-sm pb-2">{name}</p>
-        <button
-          className="flex items-center bg-blue-500 text-white text-xs px-2 py-2 rounded-md"
-          onClick={handleAddFriend}
-        >
+        <button className="flex items-center bg-blue-500 text-white text-xs px-2 py-2 rounded-md">
           <FaUserPlus className="mr-2" />
           Add Friend
         </button>

@@ -7,12 +7,19 @@ import comment from "@iconify/icons-ic/round-chat-bubble";
 import share from "@iconify/icons-ic/round-send";
 import logo from "../assets/images/exp.png";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const TweetCard = ({ userId, name, userName, tweetText, date }) => {
+  const auth = useAuth();
+  const visiterId = auth?.user?._id;
   const navigate = useNavigate();
 
   const handleRoute = () => {
-    navigate(`/user/${userId}`);
+    if (visiterId === userId) {
+      navigate("/profile");
+    } else {
+      navigate(`/user/${userId}`);
+    }
   };
 
   let inputDate = date;

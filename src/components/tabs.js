@@ -17,7 +17,7 @@ const ProfileTabs = () => {
 
   useEffect(() => {
     dispatch(getUserTweets(userId));
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   return (
     <Tabs>

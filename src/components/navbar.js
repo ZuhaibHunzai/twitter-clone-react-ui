@@ -12,24 +12,28 @@ const Header = () => {
   };
 
   const navButtons = [
-    { text: "Home", path: "/home" },
-    { text: "Trending", path: "/trending" },
-    { text: "About", path: "/about" },
+    { text: "Home", path: "/" },
+    { text: "Trending", path: "/" },
+    { text: "About", path: "/" },
     { text: "Messages", path: "/" },
   ];
 
   return (
     <header className="bg-blue-500 p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-10">
       <div className="flex items-center">
-        <img src={logo} alt="logo" className="w-8 h-8 mr-2" />
-        <span className="text-white font-bold text-lg">X</span>
+        <img
+          src={logo}
+          alt="logo"
+          className="w-8 h-8 mr-2 cursor-pointer"
+          onClick={() => handleNavigate("/")}
+        />
       </div>
       <div className="flex items-center">
         {navButtons.map((button, index) => (
           <button
             key={index}
-            className="text-white mr-4"
-            onClick={() => console.log("Navigate to:", button.path)}
+            className="text-white mr-4 cursor-pointer"
+            onClick={() => handleNavigate(button.path)}
           >
             {button.text}
           </button>

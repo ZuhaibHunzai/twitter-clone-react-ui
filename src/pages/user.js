@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import ProfileHeader from "../components/profileHeader";
-import ProfileTabs from "../components/tabs";
-import { useAuth } from "../hooks/useAuth";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserTweets } from "../redux/tweet/tweets.action";
 import PublicViewTweetCard from "../components/publicViewTweetCard";
@@ -10,11 +7,6 @@ import PublicPreviewProfileHeader from "../components/publicPreviewProfileHeader
 import { getUserData } from "../redux/user/user.action";
 
 export default function PublicPreview() {
-  const [user, setUser] = useState("");
-  const [username, setUserName] = useState("");
-
-  console.log(user, "name", username, "username");
-
   const { userId } = useParams();
 
   const dispatch = useDispatch();
@@ -24,7 +16,7 @@ export default function PublicPreview() {
   useEffect(() => {
     dispatch(getUserTweets(userId));
     dispatch(getUserData(userId));
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   return (
     <>
