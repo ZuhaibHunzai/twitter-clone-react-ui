@@ -31,7 +31,7 @@ const TweetPost = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex p-4 rounded-md shadow-md">
+      <div className="flex p-4 rounded-md shadow-md min-w-[300px]">
         <div className="flex-shrink-0">
           <img src={logo} alt="Profile" className="w-16 h-16 rounded-full" />
         </div>
