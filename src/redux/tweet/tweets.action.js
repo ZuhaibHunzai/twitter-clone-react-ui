@@ -45,8 +45,8 @@ export const deleteTweet = createAsyncThunk("deleteTweet", async (payload) => {
   });
 
   toast.promise(resultPromise, {
-    loading: "posting your tweet...",
-    success: "posted tweet successfully",
+    loading: "deleting your tweet...",
+    success: "deleted tweet successfully",
     error: (err) => err,
   });
 
