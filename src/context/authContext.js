@@ -94,7 +94,7 @@ const AuthProvider = ({ children }) => {
     axiosClient
       .post(authConfig.registerEndpoint, params)
       .then(() => {
-        navigate("/login");
+        navigate("/register");
         if (successCallback) successCallback();
       })
       .catch((err) => {
