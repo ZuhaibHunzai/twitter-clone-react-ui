@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { useAuth } from "../hooks/useAuth";
 
