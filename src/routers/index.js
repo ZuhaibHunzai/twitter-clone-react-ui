@@ -19,7 +19,6 @@ const Routers = () => {
               <ProtectedRoute>
                 <Header />
                 <Routes>
-                  <Route element={<Register />} path="/register" />
                   <Route element={<Home />} path="/" />
                   <Route element={<Profile />} path="/profile" />
                   <Route element={<PublicPreview />} path="/user/:userId" />
@@ -27,7 +26,7 @@ const Routers = () => {
               </ProtectedRoute>
             }
           />
-
+          <Route element={<Register />} path="/register" />
           <Route element={<Login />} path="/login" />
         </Routes>
       </AuthProvider>
