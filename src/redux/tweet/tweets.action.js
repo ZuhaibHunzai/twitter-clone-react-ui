@@ -33,7 +33,7 @@ export const getAllTweets = createAsyncThunk("getAllTweets", async () => {
   return res;
 });
 
-export const delteTweet = createAsyncThunk("deleteTweet", async (payload) => {
+export const deleteTweet = createAsyncThunk("deleteTweet", async (payload) => {
   const resultPromise = new Promise((resolve, reject) => {
     deleteTweetApi(payload)
       .then((res) => {

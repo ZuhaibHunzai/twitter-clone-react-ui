@@ -5,6 +5,7 @@ import Register from "../pages/signup";
 import Profile from "../pages/profile";
 import Header from "../components/navbar";
 import { AuthProvider } from "../context/authContext";
+import PublicPreview from "../pages/user";
 
 const Routers = () => {
   return (
@@ -17,6 +18,7 @@ const Routers = () => {
             <Route element={<Register />} path="/register" />
             <Route element={<Home />} path="/" />
             <Route element={<Profile />} path="/profile" />
+            <Route element={<PublicPreview />} path="/user/:userId" />
           </Routes>
         </AuthProvider>
       </Router>

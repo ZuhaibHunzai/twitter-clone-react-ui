@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  delteTweet,
+  deleteTweet,
   getAllTweets,
   getUserTweets,
   postTweet,
@@ -38,13 +38,13 @@ const tweetsSlicer = createSlice({
       state.status = "rejected";
     });
     // delete tweet extra reducers
-    builder.addCase(delteTweet.pending, (state) => {
+    builder.addCase(deleteTweet.pending, (state) => {
       state.status = "pending";
     });
-    builder.addCase(delteTweet.fulfilled, (state) => {
+    builder.addCase(deleteTweet.fulfilled, (state) => {
       state.status = "fulfilled";
     });
-    builder.addCase(delteTweet.rejected, (state) => {
+    builder.addCase(deleteTweet.rejected, (state) => {
       state.status = "rejected";
     });
     // gettting user tweets extra reducers

@@ -43,6 +43,7 @@ const TweetPost = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.tweetText}
+            required
           />
 
           {!auth?.user?.name ? (

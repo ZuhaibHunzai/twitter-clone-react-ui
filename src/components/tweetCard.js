@@ -6,8 +6,15 @@ import retweet from "@iconify/icons-ic/round-repeat";
 import comment from "@iconify/icons-ic/round-chat-bubble";
 import share from "@iconify/icons-ic/round-send";
 import logo from "../assets/images/exp.png";
+import { useNavigate } from "react-router-dom";
 
-const TweetCard = ({ name, userName, tweetText, date }) => {
+const TweetCard = ({ userId, name, userName, tweetText, date }) => {
+  const navigate = useNavigate();
+
+  const handleRoute = () => {
+    navigate(`/user/${userId}`);
+  };
+
   let inputDate = date;
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
@@ -26,28 +33,30 @@ const TweetCard = ({ name, userName, tweetText, date }) => {
 
   return (
     <div className=" text-black p-4 mb-4 rounded-md shadow-md border border-gray-200 relative">
-      <div className="flex items-center mb-4">
-        {/* Rounded profile picture */}
-        <img
-          src={logo}
-          alt="Profile"
-          className="w-12 h-12 rounded-full object-cover"
-        />
+      <div onClick={handleRoute} className="cursor-pointer">
+        <div className="flex items-center mb-4">
+          {/* Rounded profile picture */}
+          <img
+            src={logo}
+            alt="Profile"
+            className="w-12 h-12 rounded-full object-cover"
+          />
 
-        <div className="ml-4 text-left">
-          {/* User name */}
-          <p className="text-lg ">{name}</p>
-          <p className="text-sm">{userName}</p>
+          <div className="ml-4 text-left">
+            {/* User name */}
+            <p className="text-lg ">{name}</p>
+            <p className="text-sm">{userName}</p>
+          </div>
+        </div>
+
+        <div>
+          <p className="text-gray-500 text-sm absolute top-0 right-0 mr-4 mt-2">
+            Tweeted on {formattedDate}
+          </p>
+
+          <p className=" text-3xl text-left">{tweetText}</p>
         </div>
       </div>
-
-      {/* Date in the right corner */}
-      <p className="text-gray-500 text-sm absolute top-0 right-0 mr-4 mt-2">
-        Tweeted on {formattedDate}
-      </p>
-
-      {/* Tweet text */}
-      <p className=" text-3xl text-left">{tweetText}</p>
 
       <div className="flex justify-between mt-4">
         <div className="flex items-center cursor-pointer">
